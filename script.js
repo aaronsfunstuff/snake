@@ -114,8 +114,15 @@ document.addEventListener('DOMContentLoaded', function() {
     alert(`Game Over! Your score is ${score}`);
   }
 
-  document.addEventListener('keydown', changeDirection);
-  document.getElementById('startButton').addEventListener('click', startGame);
+  const startButton = document.getElementById('startButton');
+  if (startButton) {
+    startButton.addEventListener('click', startGame);
+  } else {
+    console.error('Element with ID "startButton" not found.');
+  }
 
+  document.addEventListener('keydown', changeDirection);
+  
   startGame(); // Start the game initially
 });
+
