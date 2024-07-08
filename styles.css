@@ -11,21 +11,27 @@ body {
   text-align: center;
 }
 
-.game-board {
-  width: 400px;
-  height: 400px;
-  border: 1px solid #ccc;
+#gameBoard {
   display: grid;
-  grid-template-columns: repeat(20, 1fr);
-  grid-template-rows: repeat(20, 1fr);
+  grid-template-rows: repeat(20, 20px);
+  grid-template-columns: repeat(20, 20px);
+  gap: 1px;
+  border: 2px solid black;
+  width: 420px;
+  height: 420px;
+  margin: auto;
 }
 
 .snake {
   background-color: green;
+  width: 20px;
+  height: 20px;
 }
 
 .food {
   background-color: red;
+  width: 20px;
+  height: 20px;
 }
 
 .score {
