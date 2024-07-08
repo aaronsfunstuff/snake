@@ -1,18 +1,34 @@
 document.addEventListener('DOMContentLoaded', function() {
   const gameBoard = document.getElementById('gameBoard');
   const scoreDisplay = document.getElementById('score');
+  const highScoreDisplay = document.getElementById('highScore');
 
   const gridSize = 20;
   const cellSize = 20;
-  const snakeSpeed = 200; // milliseconds
+  let snakeSpeed = 200; // milliseconds
   let snake = [{ x: 10, y: 10 }];
   let food = { x: 5, y: 5 };
   let direction = 'right';
   let score = 0;
+  let highScore = localStorage.getItem('highScore') || 0;
+  let level = 1;
   let gameLoop;
 
+  highScoreDisplay.textContent = `High Score: ${highScore}`;
+
+  function drawBoard() {
+    for (let y = 1; y <= gridSize; y++) {
+      for (let x = 1; x <= gridSize; x++) {
+        const cell = document.createElement('div');
+        cell.classList.add('cell');
+        cell.style.gridRowStart = y;
+        cell.style.gridColumnStart = x;
+        gameBoard.appendChild(cell);
+      }
+    }
+  }
+
   function drawSnake() {
-    // Clear existing snake elements only, not the entire game board
     const snakeElements = document.querySelectorAll('.snake');
     snakeElements.forEach(element => element.remove());
 
@@ -26,7 +42,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function drawFood() {
-    // Clear existing food element if any
     const existingFood = document.querySelector('.food');
     if (existingFood) {
       existingFood.remove();
@@ -37,8 +52,6 @@ document.addEventListener('DOMContentLoaded', function() {
     foodElement.style.gridColumnStart = food.x;
     foodElement.classList.add('food');
     gameBoard.appendChild(foodElement);
-
-    console.log(`Food element created at (${food.x}, ${food.y}) with classes:`, foodElement.classList);
   }
 
   function moveSnake() {
@@ -65,6 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
       score++;
       scoreDisplay.textContent = `Score: ${score}`;
       generateFood();
+      updateLevel();
     } else {
       snake.pop();
     }
@@ -111,6 +125,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  function updateLevel() {
+    if (score > 0 && score % 5 === 0) { // Increase level every 5 points
+      level++;
+      snakeSpeed -= 20; // Increase speed
+      clearInterval(gameLoop);
+      gameLoop = setInterval(moveSnake, snakeSpeed);
+      alert(`Level Up! You are now on level ${level}`);
+    }
+  }
+
   function startGame() {
     clearInterval(gameLoop); // Clear any existing game loop
     snake = [{ x: 10, y: 10 }]; // Reset snake position
@@ -123,7 +147,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function gameOver() {
     clearInterval(gameLoop);
-    alert(`Game Over! Your score is ${score}`);
+    if (score > highScore) {
+      highScore = score;
+      localStorage.setItem('highScore', highScore);
+      alert(`New High Score! Your score is ${score}`);
+    } else {
+      alert(`Game Over! Your score is ${score}`);
+    }
+    highScoreDisplay.textContent = `High Score: ${highScore}`;
   }
 
   const startButton = document.getElementById('startButton');
@@ -134,8 +165,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   document.addEventListener('keydown', changeDirection);
-  
+
+  drawBoard(); // Draw the initial grid
   startGame(); // Start the game initially
 });
-
-
