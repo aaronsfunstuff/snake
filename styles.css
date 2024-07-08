@@ -26,3 +26,15 @@
   border: 1px solid #ddd; /* Light grey grid lines */
 }
 
+.obstacle {
+  background-color: black;
+  width: 20px;
+  height: 20px;
+}
+body{
+text-align:center;
+font-family: "Margarine", sans-serif;
+}
+button{
+  font-family: "Margarine", sans-serif;
+}
