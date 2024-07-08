@@ -1,25 +1,13 @@
-body {
-  font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f0f0f0;
-}
-
-.container {
-  text-align: center;
-}
-
 #gameBoard {
   display: grid;
   grid-template-rows: repeat(20, 20px);
   grid-template-columns: repeat(20, 20px);
   gap: 1px;
   border: 2px solid black;
-  width: 420px;
-  height: 420px;
+  width: 420px; /* 20 cells * 20px + (19 gaps * 1px) + 2 * 2px border */
+  height: 420px; /* same as width for square board */
   margin: auto;
+  background-color: #f0f0f0; /* Light background color */
 }
 
 .snake {
@@ -38,7 +26,3 @@ body {
   border: 1px solid #ddd; /* Light grey grid lines */
 }
 
-
-.score {
-  margin-top: 10px;
-}
