@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function() {
   const gameBoard = document.getElementById('gameBoard');
   const scoreDisplay = document.getElementById('score');
@@ -138,22 +137,5 @@ document.addEventListener('DOMContentLoaded', function() {
   
   startGame(); // Start the game initially
 });
-// Draws grid
-function drawBoard() {
-  for (let y = 1; y <= gridSize; y++) {
-    for (let x = 1; x <= gridSize; x++) {
-      const cell = document.createElement('div');
-      cell.classList.add('cell');
-      cell.style.gridRowStart = y;
-      cell.style.gridColumnStart = x;
-      gameBoard.appendChild(cell);
-    }
-  }
-}
 
-// Call drawBoard() once to initialize the grid
-drawBoard();
-
-
-}
 
