@@ -1,3 +1,26 @@
+let level = 1;
+let snakeSpeed = 200;
+
+function updateLevel() {
+  if (score > 0 && score % 5 === 0) { // Increase level every 5 points
+    level++;
+    snakeSpeed -= 20; // Increase speed
+    clearInterval(gameLoop);
+    gameLoop = setInterval(moveSnake, snakeSpeed);
+    alert(`Level Up! You are now on level ${level}`);
+  }
+}
+
+function moveSnake() {
+  // ... existing code ...
+  
+  if (head.x === food.x && head.y === food.y) {
+    score++;
+    scoreDisplay.textContent = `Score: ${score}`;
+    generateFood();
+    updateLevel();
+  }
+
 document.addEventListener('DOMContentLoaded', function() {
   const gameBoard = document.getElementById('gameBoard');
   const scoreDisplay = document.getElementById('score');
@@ -152,4 +175,7 @@ function drawBoard() {
 
 // Call drawBoard() once to initialize the grid
 drawBoard();
+
+
+}
 
