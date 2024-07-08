@@ -34,6 +34,11 @@ body {
   height: 20px;
 }
 
+.cell {
+  border: 1px solid #ddd; /* Light grey grid lines */
+}
+
+
 .score {
   margin-top: 10px;
 }
