@@ -125,5 +125,3 @@ document.addEventListener('DOMContentLoaded', function() {
   
   startGame(); // Start the game initially
 });
-
-
