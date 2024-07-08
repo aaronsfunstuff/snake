@@ -169,3 +169,4 @@ document.addEventListener('DOMContentLoaded', function() {
   drawBoard(); // Draw the initial grid
   startGame(); // Start the game initially
 });
+
