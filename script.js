@@ -12,7 +12,10 @@ document.addEventListener('DOMContentLoaded', function() {
   let gameLoop;
 
   function drawSnake() {
-    gameBoard.innerHTML = '';
+    // Clear existing snake elements only, not the entire game board
+    const snakeElements = document.querySelectorAll('.snake');
+    snakeElements.forEach(element => element.remove());
+
     snake.forEach(segment => {
       const snakeElement = document.createElement('div');
       snakeElement.style.gridRowStart = segment.y;
@@ -23,11 +26,19 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function drawFood() {
+    // Clear existing food element if any
+    const existingFood = document.querySelector('.food');
+    if (existingFood) {
+      existingFood.remove();
+    }
+
     const foodElement = document.createElement('div');
     foodElement.style.gridRowStart = food.y;
     foodElement.style.gridColumnStart = food.x;
     foodElement.classList.add('food');
     gameBoard.appendChild(foodElement);
+
+    console.log(`Food element created at (${food.x}, ${food.y}) with classes:`, foodElement.classList);
   }
 
   function moveSnake() {
@@ -64,6 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     drawSnake();
+    drawFood(); // Ensure food is drawn after moving the snake
   }
 
   function generateFood() {
